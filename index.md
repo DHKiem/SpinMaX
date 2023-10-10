@@ -17,12 +17,11 @@ Another way to establish the exchange interaction is 'magnetic force theorem' or
 
 ## Installation 
 
-
-* (cloning) Will be opened
-
-  ```ShellSession
-  $ git clone https://github.com/DHKiem/SpinMaX.jl.git
-  ```
+* git clone Will be opened
+```bash
+$ cd SpinMaX.jl
+$ julia ./install_SpinMaX.jl
+```
 
 ## USE
 For the calculation, `magnon_input.txt` file is required. It contains input parameters for magnon bands, dos, etc.

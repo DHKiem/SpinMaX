@@ -1,10 +1,10 @@
 ![Julia1.6](https://img.shields.io/badge/Julia-1.6-blue.svg?longCache=true)
 
 # SpinMaX.jl
-`SpinMaX.jl` is the software for calculating magnon dispersion, spectra, and topology based on 'quantum mechanical' linear spin wave theory. Its quasi-particle excitations are described in a bosonic basis. 
+`SpinMax.jl` is the software for calculating magnon dispersion, spectra, and topology based on 'quantum mechanical' linear spin wave theory. Its quasi-particle excitations are described in a bosonic basis. 
 This magnonic excitation is calculated with 'spin lattice information' and 'magnetic exchange interactions'. Of course, the magnetic exchange interaction can be manually identified by users.
 Another way to establish the exchange interaction is 'magnetic force theorem' or 'magnetic force linear response theory' (MFT) method. 
-`SpinMaX.jl` provides the interface conneting to [`jx.jl`](https://kaist-elst.github.io/Jx.jl/), which is supporting MFT from electronic structure calculations (openMX, openMX-Wannier, Wannier90, QSGW).
+`SpinMax.jl` provides the interface conneting to [`jx.jl`](https://kaist-elst.github.io/Jx.jl/), which is supporting MFT from electronic structure calculations (openMX, openMX-Wannier, Wannier90, QSGW).
 
 
 ##### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
@@ -19,17 +19,18 @@ Another way to establish the exchange interaction is 'magnetic force theorem' or
 
 * git clone Will be opened
 ```bash
-$ cd SpinMaX.jl
-$ julia ./install_SpinMaX.jl
+$ cd SpinMax.jl
+$ julia ./install_SpinMax.jl
 ```
 
 ## USE
-For the calculation, `magnon_input.txt` file is required. It contains input parameters for magnon bands, dos, etc.
-
-If you have `magnon_input.txt` in your current directory, then run the script.
+For the calculation, `import SpinMax` in julia REPL.
+Recommendation is using `magnon_input.jl` file. It contains input parameters for lattice information, band paths, and computational options etc.
+Then, run the `magnon_input.jl`.
 ```bash
-$ julia $SpinMaxPATH/src/SpinMax.jl 
+$ julia magnon_input.jl
 ```
+
 
 
 ## Example
@@ -37,6 +38,10 @@ $ julia $SpinMaxPATH/src/SpinMax.jl
 * This section describes the example calculation. The first example is a 1D FM chain. 
 
 ```
+# 1D FM chain
+
+import SpinMax
+
 lattice_vec = [
 [1,0,0],
 [0,1,0],
@@ -63,6 +68,8 @@ kpaths = [
  10   -0.5 0.0 0.0   0.0 0.0 0.0
  10    0.0 0.0 0.0   0.5 0.0 0.0
 ]
+
+SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths)
 ```
 
 ``` bash

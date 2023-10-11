@@ -13,7 +13,7 @@ Another way to establish the exchange interaction is 'magnetic force theorem' or
 * Band dispersion
 * k,E-resolved Correlation function 
 * Density of states 
-* Chern number calculation
+* Berry curvature and Chern number calculation
 
 ## Installation 
 
@@ -35,7 +35,8 @@ $ julia $SpinMaxPATH/src/SpinMax.jl
 ## Example
 ### 1D FM chain
 * This section describes the example calculation. The first example is a 1D FM chain. 
-```julia
+
+```
 lattice_vec = [
 [1,0,0],
 [0,1,0],
@@ -67,6 +68,7 @@ kpaths = [
 ``` bash
 python plot_example.py
 ```
+
 ![1DFM](./docs/fig/1DFM.png)
 
 ### NiO (combined with Jx.jl)

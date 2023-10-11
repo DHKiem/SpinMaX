@@ -4,8 +4,8 @@
 `SpinMax.jl` is the software for calculating magnon dispersion, spectra, and topology based on 'quantum mechanical' linear spin wave theory. Its quasi-particle excitations are described in a bosonic basis. 
 This magnonic excitation is calculated with 'spin lattice information' and 'magnetic exchange interactions'. Of course, the magnetic exchange interaction can be manually identified by users.
 Another way to establish the exchange interaction is 'magnetic force theorem' or 'magnetic force linear response theory' (MFT) method. 
-`SpinMax.jl` provides the interface conneting to [`jx.jl`](https://kaist-elst.github.io/Jx.jl/), which is supporting MFT from electronic structure calculations (openMX, openMX-Wannier, Wannier90, QSGW).
-
+`SpinMax.jl` supports the interface conneting to [`jx.jl`](https://kaist-elst.github.io/Jx.jl/), which is supporting MFT from electronic structure calculations (openMX, openMX-Wannier, Wannier90, QSGW).
+`SpinMax.jl` is written based in Julia language. 
 
 ##### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
 
@@ -17,11 +17,22 @@ Another way to establish the exchange interaction is 'magnetic force theorem' or
 
 ## Installation 
 
-* git clone Will be opened
+### git clone
 ```bash
-$ cd SpinMax.jl
+$ git clone https://github.com/DHKiem/SpinMaX_dev.jl.git
+$ cd SpinMax_dev.jl
 $ julia ./install_SpinMax.jl
 ```
+
+or
+
+### add in julia REPL
+``` bash
+$ julia
+] add https://github.com/DHKiem/SpinMaX_dev.jl
+```
+
+
 
 ## USE
 For the calculation, `import SpinMax` in julia REPL.

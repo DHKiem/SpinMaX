@@ -14,6 +14,9 @@ Another way to establish the exchange interaction is 'magnetic force theorem' or
 ##### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
 
 ## Capability
+* Exchange interactions as full tensors including DMI, Kitaev-Γ
+* Arbitrary spin angles using Euler rotation
+* Compatible with MFT package `Jx.jl` outputs
 * Band dispersion
 * k,E-resolved Correlation function 
 * Density of states 
@@ -52,6 +55,7 @@ $ julia magnon_input.jl
 ### 1D FM chain
 * This section describes the example calculation. The first example is a 1D FM chain. 
 
+###  `1D_FM_input.jl`
 ```
 # 1D FM chain
 
@@ -86,7 +90,12 @@ kpaths = [
 
 SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths)
 ```
+### run julia script
+```bash
+julia 1D_FM_input.jl
+```
 
+A example plot is now provided as a python script. (Julia version will be supported.)
 ``` bash
 python plot_example.py
 ```
@@ -171,7 +180,14 @@ spinmax_dev.spectra(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K,
 spinmax_dev.magnon_Chern(lattice_vec, Chern_plane_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, Chern_grids)
 
 ```
+
+The correlation function can be plotted as the below figure. 
+
 ![honeycomb_correlation](./docs/fig/correlation.png)
+
+The Berry curvature of magnon is plotted. 
+
+![berry_curvature](./docs/fig/curvature.png)
 
 The Chern number is written in `Chern.txt`.
 ```

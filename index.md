@@ -1,20 +1,22 @@
 ![Julia1.6](https://img.shields.io/badge/Julia-1.6-blue.svg?longCache=true)
+![Julia1.7](https://img.shields.io/badge/Julia-1.7-blue.svg?longCache=true)
+![Julia1.8](https://img.shields.io/badge/Julia-1.8-blue.svg?longCache=true)
 ![Julia1.9](https://img.shields.io/badge/Julia-1.9-blue.svg?longCache=true)
 
 # SpinMaX.jl
-`SpinMax.jl` is the software for calculating magnon dispersion, spectra, and topology based on 'quantum mechanical' linear spin wave theory. Its quasi-particle excitations are described in a bosonic basis. 
+`SpinMax.jl` is a software for calculating magnon dispersions, spectra, and topology based on linear spin wave theory. Its quasi-particle excitations are described in a bosonic basis. 
 
 This magnonic excitation is calculated with 'spin lattice information' and 'magnetic exchange interactions'. Of course, the magnetic exchange interaction can be manually identified by users.
 
-Another way to establish the exchange interaction is 'magnetic force theorem' or 'magnetic force linear response theory' (MFT) method. 
+Another way to establish the exchange interactions is 'magnetic force theorem' or 'magnetic force linear response theory' (MFT) method. 
 `SpinMax.jl` supports the interface conneting to [`jx.jl`](https://kaist-elst.github.io/Jx.jl/), which is supporting MFT from electronic structure calculations (openMX, openMX-Wannier, Wannier90, LOBSTER, ecalJ-QSGW).
 
-`SpinMax.jl` is written based in Julia language. 
+`SpinMax.jl` is written based in Julia language. `SpinMax.jl` is tested under Julia ver. 1.6-1.9.
 
 ##### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
 
 ## Capability
-* Exchange interactions as full tensors including DMI, Kitaev-Γ
+* Exchange interactions as full tensors including Heisenberg, DMI, Kitaev-Γ
 * Arbitrary spin angles using Euler rotation
 * Compatible with MFT package `Jx.jl` outputs
 * Band dispersion
@@ -24,11 +26,12 @@ Another way to establish the exchange interaction is 'magnetic force theorem' or
 
 ## Installation 
 
+Downloading will be open soon.
 ### git clone
 ```bash
 $ git clone https://github.com/DHKiem/SpinMaX_dev.jl.git
 $ cd SpinMax_dev.jl
-$ julia ./install_SpinMax.jl
+$ julia ./install_spinmax.jl
 ```
 
 or
@@ -41,14 +44,14 @@ $ julia
 
 
 
-## USE
+## How to USE
 For the calculation, `import SpinMax` in julia REPL.
-Recommendation is using `magnon_input.jl` file. It contains input parameters for lattice information, band paths, and computational options etc.
+
+A recommendation is using `magnon_input.jl` file as described in Example. It contains input parameters for lattice information, band paths, and computational options etc.
 Then, run the `magnon_input.jl`.
 ```bash
 $ julia magnon_input.jl
 ```
-
 
 
 ## Example
@@ -61,30 +64,31 @@ $ julia magnon_input.jl
 
 import SpinMax
 
-lattice_vec = [
+lattice_vec = [  # lattice vectors in cartesian, Unit: Angstrom
 [1,0,0],
 [0,1,0],
 [0,0,1],
 ]
 
-NumAtom = 1
+NumAtom = 1    # Number of Spins
 AtomPosSpins = [
-[[0,0,0]    ,[1],[0,0]], # cell, spin, [theta,phi]
+[[0,0,0]    ,[1],[0,0]], # fractional coordinates, spin number, spin direction [theta,phi]
 ]
 
-#[atom1, atom2], [a1,a2,a3], [J1,J2,J3,J4,J5,J6,J7,J8,J9]
-exchanges = [
+#[[atom1, atom2], [a1,a2,a3], [Jxx Jxy Jxz; Jyx Jyy Jyz; Jzx Jzy Jzz]],
+exchanges = [ 
 [[1,1],  [-1,0,0],  [-1/2 0 0; 0  -1/2 0; 0 0 -1/2]],
 [[1,1],  [+1,0,0],  [-1/2 0 0; 0  -1/2 0; 0 0 -1/2]],
 ]
 
 #single-ion anisotropy
-anisotropy_K = [ 
-  [[1], [0 0 0 ; 0 0 0; 0 0 0]],
+anisotropy_K = [  
+  [[1], [0 0 0 ; 0 0 0; 0 0 0]], # [[atom number], K tensor]
 ]
 
-kpaths = [
- 10   -0.5 0.0 0.0   0.0 0.0 0.0
+kpaths = [  
+# number_of_grid   kx1 ky1 kz1    kx2 ky2 kz2
+ 10   -0.5 0.0 0.0   0.0 0.0 0.0  
  10    0.0 0.0 0.0   0.5 0.0 0.0
 ]
 
@@ -103,21 +107,22 @@ python plot_example.py
 ![1DFM](./docs/fig/1DFM.png)
 
 ### NiO (combined with Jx.jl)
+The exchange interactions can be taken from `Jx.jl` output as csv files. The converting function is `SpinMax.jx_col(filename, fm)`. If two spins have ferromagnetic configuration, the last argument 'fm' is refered as 1. For an antiferromagnet, fm = -1.
 
 ```
 #[atom1, atom2], [a1,a2,a3], [J1,J2,J3,J4,J5,J6,J7,J8,J9]
 exchanges = [
-    spinmax_dev.jx_col("jx2.col.spin_nio_atomij_1_1_[all_all]_ChemPdelta_0.0.csv",1),
-    spinmax_dev.jx_col("jx2.col.spin_nio_atomij_1_2_[all_all]_ChemPdelta_0.0.csv",-1),
-    spinmax_dev.jx_col("jx2.col.spin_nio_atomij_2_1_[all_all]_ChemPdelta_0.0.csv",-1),
-    spinmax_dev.jx_col("jx2.col.spin_nio_atomij_2_2_[all_all]_ChemPdelta_0.0.csv",1)
+    SpinMax.jx_col("jx2.col.spin_nio_atomij_1_1_[all_all]_ChemPdelta_0.0.csv",1),
+    SpinMax.jx_col("jx2.col.spin_nio_atomij_1_2_[all_all]_ChemPdelta_0.0.csv",-1),
+    SpinMax.jx_col("jx2.col.spin_nio_atomij_2_1_[all_all]_ChemPdelta_0.0.csv",-1),
+    SpinMax.jx_col("jx2.col.spin_nio_atomij_2_2_[all_all]_ChemPdelta_0.0.csv",1)
 ]
 ```
 
 
 ### Honeycomb lattice with DMI
 ```
-import spinmax_dev
+import SpinMax
 
 a = sqrt(3)
 lattice_vec = [
@@ -185,13 +190,13 @@ kgrids = [13,13,1]
 Chern_plane_vec = lattice_vec
 Chern_grids = [13,13,1]
 
-#spinmax_dev.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths)
-spinmax_dev.spectra(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths, Emin, Emax, Egrid, Temperature)
-spinmax_dev.magnon_Chern(lattice_vec, Chern_plane_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, Chern_grids)
+#SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths)
+SpinMax.spectra(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths, Emin, Emax, Egrid, Temperature)
+SpinMax.magnon_Chern(lattice_vec, Chern_plane_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, Chern_grids)
 
 ```
 
-The correlation function can be plotted as the below figure. 
+The correlation function (spectra) can be plotted as the below figure. 
 
 ![honeycomb_correlation](./docs/fig/correlation.png)
 
@@ -199,7 +204,7 @@ The Berry curvature of magnon is plotted.
 
 ![berry_curvature](./docs/fig/curvature.png)
 
-The Chern number is written in `Chern.txt`.
+The Chern number is written in `Chern.txt`. 
 ```
 1 0.927
 2 -0.927

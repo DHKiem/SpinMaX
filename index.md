@@ -3,8 +3,8 @@
 ![Julia1.8](https://img.shields.io/badge/Julia-1.8-blue.svg?longCache=true)
 ![Julia1.9](https://img.shields.io/badge/Julia-1.9-blue.svg?longCache=true)
 
-# SpinMaX.jl
-`SpinMax.jl` is a software for calculating magnon dispersions, spectra, and topology based on linear spin wave theory. Its quasi-particle excitations are described in a bosonic basis. 
+# SpinMax.jl
+`SpinMax.jl` is a software for calculating magnon dispersions, spectra, and topology based on linear spin wave theory using Holstein-Primakoff transformation. Its quasi-particle excitations are described in a bosonic basis. 
 
 This magnonic excitation is calculated with 'spin lattice information' and 'magnetic exchange interactions'. Of course, the magnetic exchange interaction can be manually identified by users.
 
@@ -15,18 +15,27 @@ Another way to establish the exchange interactions is 'magnetic force theorem' o
 
 ##### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
 
-## Capability
+## Capability and features
+#### Physical features
 * Exchange interactions as full tensors including Heisenberg, DMI, Kitaev-Γ
+* Single-ion anisotropy
 * Arbitrary spin angles using Euler rotation
-* Compatible with MFT package `Jx.jl` outputs
-* Band dispersion
-* k,E-resolved Correlation function 
-* Density of states 
+* Magnon band dispersion
+* Spectra (k,E-resolved Correlation function)
+* Density of states
 * Berry curvature and Chern number calculation
+
+#### Computational Utilities
+* Compatible with MFT package `Jx.jl` outputs
+* Checking Hermitian
+* Parallel computing 
+* Both for REPL and Command lines
+* Plotting tools
+
 
 ## Installation 
 
-Downloading will be open soon.
+The code will be open soon.
 ### git clone
 ```bash
 $ git clone https://github.com/DHKiem/SpinMaX_dev.jl.git
@@ -39,19 +48,32 @@ or
 ### add in julia REPL
 ``` bash
 $ julia
-] add https://github.com/DHKiem/SpinMaX_dev.jl
+] add https://github.com/DHKiem/SpinMax_dev.jl
 ```
 
 
 
 ## How to USE
 For the calculation, `import SpinMax` in julia REPL.
+```
+$ julia
+julia> import SpinMax
+```
 
-A recommendation is using `magnon_input.jl` file as described in Example. It contains input parameters for lattice information, band paths, and computational options etc.
+A recommendation is using `magnon_input.jl` file as described in `example`. It contains input parameters for lattice information, band paths, and computational options etc.
 Then, run the `magnon_input.jl`.
 ```bash
 $ julia magnon_input.jl
 ```
+
+For a parallel computing, `Distributed` package is used. 
+```
+$ julia -p 4
+julia> using Distributed
+julia> @everywhere import SpinMax
+```
+Tip) Parallelization is recommended for large number of spins.
+
 
 
 ## Example
@@ -92,16 +114,19 @@ kpaths = [
  10    0.0 0.0 0.0   0.5 0.0 0.0
 ]
 
-SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths)
+#SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, kpaths)
+SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, kpaths, anisotropy = anisotropy_K) # anisotropy keyword is optional. Unless using it, the single-ion anisotropies are set to 0. 
 ```
 ### run julia script
 ```bash
-julia 1D_FM_input.jl
+$ cd example/1D_FM
+$ julia 1D_FM_input.jl
 ```
 
-A example plot is now provided as a python script. (Julia version will be supported.)
+The example plots are provided as the python and Julia scripts.
 ``` bash
-python plot_example.py
+$ python plot_example.py
+$ julia ../../plots/plot_band.jl
 ```
 
 ![1DFM](./docs/fig/1DFM.png)
@@ -180,18 +205,14 @@ kpaths = [
 45    0.6667   0.6667   0.0000        1.0000   1.0000   0.0000  # K G
 ]
 
-
-Emin = 1.2
-Egrid = 0.4
-Emax = 20.0
-Temperature = 200
-kgrids = [13,13,1]
+kgrids = [41,41,1]
 
 Chern_plane_vec = lattice_vec
 Chern_grids = [13,13,1]
 
-#SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths)
-SpinMax.spectra(lattice_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, kpaths, Emin, Emax, Egrid, Temperature)
+SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges,  kpaths, anisotropy = anisotropy_K)
+SpinMax.spectra(lattice_vec, NumAtom, AtomPosSpins, exchanges, kpaths, anisotropy = anisotropy_K, Emin = 1.2, Emax = 20.0, Egrid = 0.4, Temperature = 200)
+SpinMax.dos(lattice_vec, NumAtom, AtomPosSpins, exchanges, kgrids, anisotropy = anisotropy_K, Emin = 0.0, Emax = 30.0, Egrid = 0.1)
 SpinMax.magnon_Chern(lattice_vec, Chern_plane_vec, NumAtom, AtomPosSpins, exchanges, anisotropy_K, Chern_grids)
 
 ```

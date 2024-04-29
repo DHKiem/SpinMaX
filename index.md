@@ -1,3 +1,8 @@
+---
+use_math: true
+---
+
+
 ![Julia1.6](https://img.shields.io/badge/Julia-1.6-blue.svg?longCache=true)
 ![Julia1.7](https://img.shields.io/badge/Julia-1.7-blue.svg?longCache=true)
 ![Julia1.8](https://img.shields.io/badge/Julia-1.8-blue.svg?longCache=true)

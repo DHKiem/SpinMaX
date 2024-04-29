@@ -1,3 +1,9 @@
 title: SpinMax.jl
 theme: jekyll-theme-cayman
 
+# Math equation
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false

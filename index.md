@@ -2,6 +2,7 @@
 ![Julia1.7](https://img.shields.io/badge/Julia-1.7-blue.svg?longCache=true)
 ![Julia1.8](https://img.shields.io/badge/Julia-1.8-blue.svg?longCache=true)
 ![Julia1.9](https://img.shields.io/badge/Julia-1.9-blue.svg?longCache=true)
+![Julia1.10](https://img.shields.io/badge/Julia-1.10-blue.svg?longCache=true)
 
 # SpinMax.jl
 `SpinMax.jl` is a software for calculating magnon dispersions, spectra, and topology based on linear spin wave theory using Holstein-Primakoff transformation. Its quasi-particle excitations are described in a bosonic basis. 
@@ -13,7 +14,7 @@ Another way to establish the exchange interactions is 'magnetic force theorem' o
 
 `SpinMax.jl` is written based in Julia language. `SpinMax.jl` is tested under Julia ver. 1.6-1.9.
 
-##### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
+#### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
 
 ## Capability and features
 #### Physical features
@@ -35,22 +36,18 @@ Another way to establish the exchange interactions is 'magnetic force theorem' o
 
 ## Installation 
 
-The code will be open soon.
+### (Recommended) add in julia REPL
+``` bash
+$ julia
+] add https://github.com/KAIST-ELST/SpinMax_dev.jl.git
+```
+
 ### git clone
 ```bash
-$ git clone https://github.com/DHKiem/SpinMaX_dev.jl.git
+$ git clone https://github.com/KAIST-ELST/SpinMax_dev.jl.git
 $ cd SpinMax_dev.jl
 $ julia ./install_spinmax.jl
 ```
-
-or
-
-### add in julia REPL
-``` bash
-$ julia
-] add https://github.com/DHKiem/SpinMax_dev.jl
-```
-
 
 
 ## How to USE
@@ -80,7 +77,7 @@ Tip) Parallelization is recommended for large number of spins.
 ### 1D FM chain
 * This section describes the example calculation. The first example is a 1D FM chain. 
 
-###  `1D_FM_input.jl`
+###  `example/example1_1D_FM.jl`
 ```
 # 1D FM chain
 
@@ -104,32 +101,109 @@ exchanges = [
 ]
 
 #single-ion anisotropy
-anisotropy_K = [  
-  [[1], [0 0 0 ; 0 0 0; 0 0 0]], # [[atom number], K tensor]
+anisotropy_K = [
+  [[1], [0 0 0 ; 0 0 0; 0 0 0]],
 ]
 
-kpaths = [  
-# number_of_grid   kx1 ky1 kz1    kx2 ky2 kz2
- 10   -0.5 0.0 0.0   0.0 0.0 0.0  
- 10    0.0 0.0 0.0   0.5 0.0 0.0
+kpaths = [
+ 20   -0.5 0.0 0.0   0.0 0.0 0.0
+ 20    0.0 0.0 0.0   0.5 0.0 0.0
 ]
 
-#SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, kpaths)
-SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, kpaths, anisotropy = anisotropy_K) # anisotropy keyword is optional. Unless using it, the single-ion anisotropies are set to 0. 
+kgrids = [200,1,1]
+
+
+### Calculation parts: 
+# anisotropy keyword is optional. Unless using it, the single-ion anisotropies are set to 0. 
+# magnon band
+SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, kpaths, anisotropy=anisotropy_K)
+
+# magnon spectral function
+SpinMax.spectra(lattice_vec, NumAtom, AtomPosSpins, exchanges,kpaths, anisotropy = anisotropy_K, Emin=0.1, Emax=5.0, Egrid=0.1, Temperature=100)
+
+# magnon dos
+SpinMax.dos(lattice_vec, NumAtom, AtomPosSpins, exchanges, kgrids, anisotropy = anisotropy_K, Emin = 0.0, Emax = 5.0, Egrid = 0.1)
+
+### Plot parts:
+SpinMax.plot_band()
+
+SpinMax.plot_spectra("xx") 
+# you can change the parameter: "xx", "xy", "xz", "yx", "yy", "yz", "zx", "zy", "zz"
+
+SpinMax.plot_dos(0.15)
+# the paramter is the sigma for gaussian broadening.
+
 ```
 ### run julia script
 ```bash
-$ cd example/1D_FM
-$ julia 1D_FM_input.jl
+$ cd example/
+$ julia example/1D_FM.jl
 ```
 
-The example plots are provided as the python and Julia scripts.
+### Plot
+```
+julia> import SpinMax
+julia> SpinMax.plot_band()    # band
+julia> SpinMax.plot_spectra() # spectral 
+julia> SpinMax.plot_dos()     # dos
+```
+Plot scripts (Python/Julia) are also provided in `plots` directory.
+
 ``` bash
 $ python plot_example.py
-$ julia ../../plots/plot_band.jl
 ```
-
 ![1DFM](./docs/fig/1DFM.png)
+
+### 1D AFM chain
+```
+# 1D AFM chain
+
+import SpinMax
+
+lattice_vec = [
+[2,0,0],
+[0,1,0],
+[0,0,1],
+]
+
+NumAtom = 2
+
+AtomPosSpins = [
+[[0,0,0]    ,[1], [0,0]],
+[[1/2,0,0]  ,[1], [180,0]],
+]
+
+
+#[atom1, atom2], [a1,a2,a3], [J1,J2,J3,J4,J5,J6,J7,J8,J9]
+exchanges = [
+[[1,2],  [ 0,0,0],  [1/2 0 0; 0  1/2 0; 0 0 1/2]],
+[[1,2],  [-1,0,0],  [1/2 0 0; 0  1/2 0; 0 0 1/2]],
+[[2,1],  [+1,0,0],  [1/2 0 0; 0  1/2 0; 0 0 1/2]],
+[[2,1],  [ 0,0,0],  [1/2 0 0; 0  1/2 0; 0 0 1/2]],
+]
+
+anisotropy_K = [
+  [[1], [0 0 0 ; 0 0 0; 0 0 0]],
+  [[2], [0 0 0 ; 0 0 0; 0 0 0]],
+]
+
+kpaths = [
+ 30   -0.5 0.0 0.0   0.0 0.0 0.0
+ 30    0.0 0.0 0.0   0.5 0.0 0.0
+]
+
+kgrids = [200,1,1]
+
+SpinMax.band(lattice_vec, NumAtom, AtomPosSpins, exchanges, kpaths, anisotropy=anisotropy_K)
+SpinMax.spectra(lattice_vec, NumAtom, AtomPosSpins, exchanges,kpaths, anisotropy = anisotropy_K, Emin=0.01, Emax=5.0, Egrid=0.1, Temperature=100)
+SpinMax.dos(lattice_vec, NumAtom, AtomPosSpins, exchanges, kgrids, anisotropy = anisotropy_K, Emin = 0.0, Emax = 5.0, Egrid = 0.1)
+
+SpinMax.plot_band()
+SpinMax.plot_spectra("xx")
+SpinMax.plot_dos(0.15)
+
+```
+![1DAFM](./docs/fig/1DAFM.png)
 
 ### NiO (combined with Jx.jl)
 The exchange interactions can be taken from `Jx.jl` output as csv files. The converting function is `SpinMax.jx_col(filename, fm)`. If two spins have ferromagnetic configuration, the last argument 'fm' is refered as 1. For an antiferromagnet, fm = -1.

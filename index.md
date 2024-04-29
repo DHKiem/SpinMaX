@@ -7,12 +7,26 @@
 # SpinMax.jl
 `SpinMax.jl` is a software for calculating magnon dispersions, spectra, and topology based on linear spin wave theory using Holstein-Primakoff transformation. Its quasi-particle excitations are described in a bosonic basis. 
 
+$$
+S'^z = S-a^\dagger a 
+$$
+$$
+S'^+ = \sqrt{2S-a^\dagger a}~ a 
+$$
+$$
+S'^- = a^\dagger\sqrt{2S-a^\dagger a}  
+$$
+
 This magnonic excitation is calculated with 'spin lattice information' and 'magnetic exchange interactions'. Of course, the magnetic exchange interaction can be manually identified by users.
 
-Another way to establish the exchange interactions is 'magnetic force theorem' or 'magnetic force linear response theory' (MFT) method. 
-`SpinMax.jl` supports the interface conneting to [`jx.jl`](https://kaist-elst.github.io/Jx.jl/), which is supporting MFT from electronic structure calculations (openMX, openMX-Wannier, Wannier90, LOBSTER, ecalJ-QSGW).
+$$
+H=-\sum_{i,j}\vec{S}_i \cdot \overleftrightarrow{J} \cdot \vec{S_j} 
+$$
 
-`SpinMax.jl` is written based in Julia language. `SpinMax.jl` is tested under Julia ver. 1.6-1.9.
+Another way to establish the exchange interactions is 'magnetic force theorem' or 'magnetic force linear response theory' (MFT) method. 
+`SpinMax.jl` supports the interface conneting to [`Jx.jl`](https://kaist-elst.github.io/Jx.jl/), which is supporting MFT from electronic structure calculations (openMX, openMX-Wannier, Wannier90, LOBSTER, ecalJ-QSGW).
+
+`SpinMax.jl` is written based in Julia language. `SpinMax.jl` is tested under Julia ver. 1.6-1.10.
 
 #### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
 

@@ -8,6 +8,72 @@
 
 # SpinMax.jl
 `SpinMax.jl` is a software for calculating magnon dispersions, spectra, and topology based on linear spin wave theory using Holstein-Primakoff transformation. Its quasi-particle excitations are described in a bosonic basis. 
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <msup>
+    <mi>S</mi>
+    <mrow>
+      <mo data-mjx-alternate="1" data-mjx-pseudoscript="true">&#x2032;</mo>
+      <mi>z</mi>
+    </mrow>
+  </msup>
+  <mo>=</mo>
+  <mi>S</mi>
+  <mo>&#x2212;</mo>
+  <msup>
+    <mi>a</mi>
+    <mo>&#x2020;</mo>
+  </msup>
+  <mi>a</mi>
+</math>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <msup>
+    <mi>S</mi>
+    <mrow>
+      <mo data-mjx-alternate="1" data-mjx-pseudoscript="true">&#x2032;</mo>
+      <mo>+</mo>
+    </mrow>
+  </msup>
+  <mo>=</mo>
+  <msqrt>
+    <mn>2</mn>
+    <mi>S</mi>
+    <mo>&#x2212;</mo>
+    <msup>
+      <mi>a</mi>
+      <mo>&#x2020;</mo>
+    </msup>
+    <mi>a</mi>
+  </msqrt>
+  <mtext>&#xA0;</mtext>
+  <mi>a</mi>
+</math>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <msup>
+    <mi>S</mi>
+    <mrow>
+      <mo data-mjx-alternate="1" data-mjx-pseudoscript="true">&#x2032;</mo>
+      <mo>&#x2212;</mo>
+    </mrow>
+  </msup>
+  <mo>=</mo>
+  <msup>
+    <mi>a</mi>
+    <mo>&#x2020;</mo>
+  </msup>
+  <msqrt>
+    <mn>2</mn>
+    <mi>S</mi>
+    <mo>&#x2212;</mo>
+    <msup>
+      <mi>a</mi>
+      <mo>&#x2020;</mo>
+    </msup>
+    <mi>a</mi>
+  </msqrt>
+</math>
+
 
 This magnonic excitation is calculated with 'spin lattice information' and 'magnetic exchange interactions'. Of course, the magnetic exchange interaction can be manually identified by users.
 

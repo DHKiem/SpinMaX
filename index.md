@@ -1,6 +1,3 @@
----
-use_math: true
----
 
 
 ![Julia1.6](https://img.shields.io/badge/Julia-1.6-blue.svg?longCache=true)
@@ -12,21 +9,45 @@ use_math: true
 # SpinMax.jl
 `SpinMax.jl` is a software for calculating magnon dispersions, spectra, and topology based on linear spin wave theory using Holstein-Primakoff transformation. Its quasi-particle excitations are described in a bosonic basis. 
 
-$$
-S'^z = S-a^\dagger a 
-$$
-$$
-S'^+ = \sqrt{2S-a^\dagger a}~ a 
-$$
-$$
-S'^- = a^\dagger\sqrt{2S-a^\dagger a}  
-$$
-
 This magnonic excitation is calculated with 'spin lattice information' and 'magnetic exchange interactions'. Of course, the magnetic exchange interaction can be manually identified by users.
 
-$$
-H=-\sum_{i,j}\vec{S}_i \cdot \overleftrightarrow{J} \cdot \vec{S_j} 
-$$
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>H</mi>
+  <mo>=</mo>
+  <mo>&#x2212;</mo>
+  <munder>
+    <mo data-mjx-texclass="OP">&#x2211;</mo>
+    <mrow data-mjx-texclass="ORD">
+      <mi>i</mi>
+      <mo>,</mo>
+      <mi>j</mi>
+    </mrow>
+  </munder>
+  <msub>
+    <mrow data-mjx-texclass="ORD">
+      <mover>
+        <mi>S</mi>
+        <mo stretchy="false">&#x2192;</mo>
+      </mover>
+    </mrow>
+    <mi>i</mi>
+  </msub>
+  <mo>&#x22C5;</mo>
+  <mover>
+    <mi>J</mi>
+    <mo>&#x2194;</mo>
+  </mover>
+  <mo>&#x22C5;</mo>
+  <mrow data-mjx-texclass="ORD">
+    <mover>
+      <msub>
+        <mi>S</mi>
+        <mi>j</mi>
+      </msub>
+      <mo stretchy="false">&#x2192;</mo>
+    </mover>
+  </mrow>
+</math>
 
 Another way to establish the exchange interactions is 'magnetic force theorem' or 'magnetic force linear response theory' (MFT) method. 
 `SpinMax.jl` supports the interface conneting to [`Jx.jl`](https://kaist-elst.github.io/Jx.jl/), which is supporting MFT from electronic structure calculations (openMX, openMX-Wannier, Wannier90, LOBSTER, ecalJ-QSGW).

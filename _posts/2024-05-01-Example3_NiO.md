@@ -1,5 +1,5 @@
 ---
-title: Example1 1D FM Chain
+title: Example3 NiO
 author: Do Hoon Kiem
 date: 2024-05-01
 category: Jekyll

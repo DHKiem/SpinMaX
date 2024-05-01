@@ -1,5 +1,5 @@
 ---
-title: Example1 1D FM Chain
+title: Example4 Honeycomb DM
 author: Do Hoon Kiem
 date: 2024-05-01
 category: Jekyll

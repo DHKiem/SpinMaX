@@ -1,5 +1,5 @@
 ---
-title: Example1 1D AFM Chain
+title: Example2 1D AFM Chain
 author: Do Hoon Kiem
 date: 2024-05-01
 category: Jekyll

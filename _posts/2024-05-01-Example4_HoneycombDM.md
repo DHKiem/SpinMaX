@@ -6,6 +6,8 @@ category: Jekyll
 layout: post
 ---
 
+This example explains a magnon in the ferromagnetic honeycomb with Dzyaloshinskii-Moriya (DM) interaction. This example gives the Berry curvature as well as the magnon band and dos.
+
 ```julia
 import SpinMax
 

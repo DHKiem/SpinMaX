@@ -6,6 +6,8 @@ category: Jekyll
 layout: post
 ---
 
+In this example, 1D AFM chain will be treated. 
+
 ```julia
 # 1D AFM chain
 

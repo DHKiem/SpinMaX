@@ -1,13 +1,11 @@
 ---
 title: Installation
 author: Do Hoon Kiem
-date: 2024-05-01
+date: 2024-04-30
 category: Jekyll
 layout: post
 ---
 
-
-## Installation 
 
 ### (Recommended) add in julia REPL
 ``` bash

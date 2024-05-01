@@ -20,7 +20,7 @@ exchanges = SpinMax.jx_exchange_col("./","nio",[
              ])
 ```
 
-[1,2,-1]: [atom1, atom2, antiferromagnetic]. the last component -1 indicates the antiferromagnetic coupling between atom 1 and 2. 
+[1,2,-1]: [atom1, atom2, antiferromagnetic]. the last component -1 indicates the antiferromagnetic coupling between atom 1 and 2. Two magnetic sites are connected by the antiferromagnetic couplings. 
 
 ### make `magnon_input.jl`
 A script making `magnon_input.jl` is provided. 
@@ -50,7 +50,7 @@ lattice_vec = [
 
 AtomPosSpins = [
 [[0.0, 0.0, 0.0], [1.0], [0.0, 0.0]],
-[[0.5, 0.5, 0.5], [1.0], [0.0, 0.0]],
+[[0.5, 0.5, 0.5], [1.0], [180.0, 0.0]], #AFM
 ]
 
 #[atom1, atom2], [a1,a2,a3], [J1,J2,J3,J4,J5,J6,J7,J8,J9]

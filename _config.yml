@@ -1,16 +1,16 @@
 # Configurations
-title:            Jekyll Gitbook
-longtitle:        Jekyll Gitbook
-author:           HE Tao
-email:            sighingnow@gmail.com
+title:            SpinMax.jl
+longtitle:        SpinMax.jl
+author:           Do Hoon Kiem
+email:            kiem.dohoon@gmail.com
 description: >
   Build Jekyll site with the GitBook style.
 
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://sighingnow.github.io'
-baseurl:          '/jekyll-gitbook'
+url:              'https://dhkiem.github.io'
+baseurl:          '/SpinMax.jl'
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself

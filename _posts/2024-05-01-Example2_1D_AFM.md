@@ -6,7 +6,7 @@ category: Jekyll
 layout: post
 ---
 
-```
+```julia
 # 1D AFM chain
 
 import SpinMax

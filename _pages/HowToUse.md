@@ -7,7 +7,7 @@ layout: post
 ---
 
 For the calculation, `import SpinMax` in julia REPL.
-```
+```julia
 $ julia
 julia> import SpinMax
 ```
@@ -19,7 +19,7 @@ $ julia magnon_input.jl
 ```
 
 For a parallel computing, `Distributed` package is used. 
-```
+```julia
 $ julia -p 4
 julia> using Distributed
 julia> @everywhere import SpinMax

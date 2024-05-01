@@ -6,7 +6,7 @@ category: Jekyll
 layout: post
 ---
 
-```
+```julia
 import SpinMax
 
 a = sqrt(3)

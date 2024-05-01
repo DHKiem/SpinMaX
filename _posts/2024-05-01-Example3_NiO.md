@@ -16,9 +16,11 @@ atom_sets: atom groups considered in the `SpinMax` calculation.
 The exchange interactions can be read from csv files after `Jx.jl` calculation. If you got the csv files in your current directory, the exchanges couplings can be included as follows
 ```julia
 exchanges = SpinMax.jx_exchange_col("./","nio",[
-             [1,1], [1,2], [2,1], [2,2],
+             [1,1], [1,2,-1], [2,1,-1], [2,2],
              ])
 ```
+
+[1,2,-1]: [atom1, atom2, antiferromagnetic]. the last component -1 indicates the antiferromagnetic coupling between atom 1 and 2. 
 
 ### make `magnon_input.jl`
 A script making `magnon_input.jl` is provided. 
@@ -53,7 +55,7 @@ AtomPosSpins = [
 
 #[atom1, atom2], [a1,a2,a3], [J1,J2,J3,J4,J5,J6,J7,J8,J9]
 exchanges = SpinMax.jx_exchange_col("./","nio",[
-             [1,1], [1,2], [2,1], [2,2],
+             [1,1], [1,2,-1], [2,1,-1], [2,2],
              ])
 
 kpaths = [

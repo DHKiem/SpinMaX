@@ -46,6 +46,7 @@ Another way to establish the exchange interactions is 'magnetic force theorem' o
 * Spectra (k,E-resolved Correlation function)
 * Density of states
 * Berry curvature and Chern number calculation
+* Magnetic fields on magnons
 
 #### Computational Utilities
 * Compatible with MFT package `Jx.jl` outputs

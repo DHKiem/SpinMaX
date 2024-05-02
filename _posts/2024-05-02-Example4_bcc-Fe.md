@@ -1,5 +1,5 @@
 ---
-title: Example3 NiO
+title: Example4 bcc-Fe
 author: Do Hoon Kiem
 date: 2024-05-01
 category: Jekyll

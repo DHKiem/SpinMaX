@@ -25,13 +25,13 @@ exchanges = SpinMax.jx_exchange_col("./","nio",[
 ### make `magnon_input.jl`
 A script making `magnon_input.jl` is provided. 
 ```bash
-julia $SpinMaxRoot/src/Jx_to_SpinMax.jl --atom1 1,2 --atom2 1,2 ./
+julia $SpinMaxRoot/src/Jx_to_SpinMax.jl --atom1 1,2 --atom2 1,2 ./ nio.toml
 ```
 
---atom1 : target atom1 
---atom2 : target atom2
-./ : current directory (where jld2 files exist)
-
+* --atom1 : target atom1 
+* --atom2 : target atom2
+* ./ : current directory (where jld2 files exist)
+* nio.toml : k_paths and k_grids are read from toml file. 
 
 After the generation, you can fix kpaths and kgrids.
 

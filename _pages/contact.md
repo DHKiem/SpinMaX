@@ -6,5 +6,5 @@ category: Jekyll
 layout: post
 ---
 
-Contact email
+### Developer: [Do Hoon Kiem](https://dhkiem.github.io/) 
 
